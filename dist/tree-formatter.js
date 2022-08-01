@@ -51,15 +51,16 @@ __webpack_require__.r(__webpack_exports__);
 /** 
   * 树转扁平数组
   * @param {Array<any>} tree 树(数组) 
+  * @param {string} childLabel 子节点属性名，默认 children
   * @returns 返回树扁平后的数组
   */
-const treeToFlat = (tree) => {
+const treeToFlat = (tree, childLabel = 'children') => {
   var resultList = [];
   function flatTree(data) {
     data.forEach(item => {
       resultList.push(item)
-      if (item.children?.length) {
-        flatTree(item.children);
+      if (item[childLabel]?.length) {
+        flatTree(item[childLabel]);
       }
     });
   }
@@ -69,22 +70,26 @@ const treeToFlat = (tree) => {
 
 /** 
  * 扁平数组转树
- * @param {Array<any>} tree 树(数组) 
- * @param {string} id (节点唯一标识字段名，默认id) 
- * @param {string} pid (节点的父节点唯一标识字段名，默认pId)
- * @param {string} children (子节点字段名)
- * @returns {Array<any>} 返回树结构
+ * @param {array<any>} tree 树(数组) 
+ * @param {object} fieldNames 	自定义节点 id、pid、children 的字段
+ * @returns {array<any>} 返回树结构
  * */
-const flatToTree = (data, id = 'id', pid = 'pid', children = 'children') => {
+const flatToTree = (data, fieldNames) => {
+  const attr = {
+    id: 'id',
+    pid: 'pid',
+    children: 'children',
+    ...fieldNames
+  }
   var map = {}
   data.forEach(item => {
-    map[item[id]] = item
+    map[item[attr.id]] = item
   })
   var result = []
   data.forEach(item => {
-    var parent = map[item[pid]]
+    var parent = map[item[attr.pid]]
     if (parent) {
-      (parent[children] || (parent[children] = [])).push(item)
+      (parent[attr.children] || (parent[attr.children] = [])).push(item)
     } else {
       result.push(item)
     }
