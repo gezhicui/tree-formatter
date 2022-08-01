@@ -20,7 +20,7 @@ const treeToFlat = (tree, childLabel = 'children') => {
 
 /** 
  * 扁平数组转树
- * @param {array<any>} tree 树(数组) 
+ * @param {array<any>} data 扁平数组
  * @param {object} fieldNames 	自定义节点 id、pid、children 的字段
  * @returns {array<any>} 返回树结构
  * */
