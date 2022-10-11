@@ -1,6 +1,6 @@
 {
   "name": "tree-formatter",
-  "version": "1.0.8",
+  "version": "2.0.4",
   "description": "A tool for formatting tree structured data",
   "main": "index.js",
   "repository": {
