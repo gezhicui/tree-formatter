@@ -188,11 +188,7 @@ console.log(res);
 
 ```js
 //flat为示例结构中的flat
-const res1 = flatToTree(flat, {
-  id: 'id',
-  pid: 'pid',
-  children: 'children',
-});
+const res1 = flatToTree(flat);
 
 console.log(res1); //输出结果为示例结构中的tree
 ```
