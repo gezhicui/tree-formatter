@@ -1,19 +1,19 @@
 {
   "name": "tree-formatter",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "A tool for formatting tree structured data",
-  "main": "dist/rollup-lib.cjs.js",
-  "module": "dist/rollup-lib.esm.js",
-  "browser": "dist/rollup-lib.umd.js",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gezhicui/tree-formatter.git"
   },
   "files": [
-    "dist"
+    "lib"
   ],
   "scripts": {
-    "build": "rm -rf dist && rollup -c",
+    "build": "rm -rf lib && rollup -c",
     "dev": "rollup -c -w"
   },
   "keywords": [],
@@ -22,6 +22,13 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^11.0.1",
     "@rollup/plugin-node-resolve": "^7.0.0",
-    "rollup": "^1.29.0"
+    "@rollup/plugin-typescript": "^9.0.2",
+    "rollup": "^1.29.0",
+    "rollup-plugin-dts": "^5.0.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "tslib": "^2.4.1"
   }
 }
