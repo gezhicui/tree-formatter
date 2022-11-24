@@ -1,22 +1,27 @@
 {
   "name": "tree-formatter",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "A tool for formatting tree structured data",
-  "main": "dist/tree-formatter.min.js",
+  "main": "dist/rollup-lib.cjs.js",
+  "module": "dist/rollup-lib.esm.js",
+  "browser": "dist/rollup-lib.umd.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gezhicui/tree-formatter.git"
   },
-  "files": [],
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx webpack --config webpack.config.js"
+    "build": "rm -rf dist && rollup -c",
+    "dev": "rollup -c -w"
   },
   "keywords": [],
   "author": "yangyuxiang",
   "license": "ISC",
   "devDependencies": {
-    "webpack": "^5.73.0",
-    "webpack-cli": "^4.10.0"
+    "@rollup/plugin-commonjs": "^11.0.1",
+    "@rollup/plugin-node-resolve": "^7.0.0",
+    "rollup": "^1.29.0"
   }
 }

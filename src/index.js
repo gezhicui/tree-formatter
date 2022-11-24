@@ -4,7 +4,7 @@
  * @param {object} fieldOptions 自定义节点children 的字段以及返回内容
  * @returns 返回树扁平后的数组
  */
-const treeToFlat = (tree, fieldOptions) => {
+export const treeToFlat = (tree, fieldOptions) => {
   const attr = {
     childField: 'children',
     returnFields: [],
@@ -13,11 +13,11 @@ const treeToFlat = (tree, fieldOptions) => {
   const { childField, returnFields } = attr;
   var resultList = [];
   function flatTree(data) {
-    data.forEach((item) => {
+    data.forEach(item => {
       if (Array.isArray(returnFields) && returnFields.length !== 0) {
         //返回自定义内容
         const filterItem = {};
-        returnFields.forEach((label) => (filterItem[label] = item[label]));
+        returnFields.forEach(label => (filterItem[label] = item[label]));
         resultList.push(filterItem);
       } else {
         //返回全部内容
@@ -39,7 +39,7 @@ const treeToFlat = (tree, fieldOptions) => {
  * @param {object} fieldNames 	自定义节点 id、pid、children 的字段
  * @returns {array<any>} 返回树结构
  * */
-const flatToTree = (data, fieldNames) => {
+export const flatToTree = (data, fieldNames) => {
   const attr = {
     id: 'id',
     pid: 'pid',
@@ -48,11 +48,11 @@ const flatToTree = (data, fieldNames) => {
   };
   const { id, pid, children } = attr;
   const map = {};
-  data.forEach((item) => {
+  data.forEach(item => {
     map[item[id]] = item;
   });
   const result = [];
-  data.forEach((item) => {
+  data.forEach(item => {
     var parent = map[item[pid]];
     if (parent) {
       (parent[children] || (parent[children] = [])).push(item);
@@ -70,7 +70,7 @@ const flatToTree = (data, fieldNames) => {
  * @param {object} fieldNames 	自定义节点 id、children 的字段
  * @returns {Array<any>} 返回祖先列表
  * */
-const findTreeParentById = (tree, nodeId, fieldNames) => {
+export const findTreeParentById = (tree, nodeId, fieldNames) => {
   const attr = {
     id: 'id',
     children: 'children',
@@ -79,8 +79,8 @@ const findTreeParentById = (tree, nodeId, fieldNames) => {
   const { id, children } = attr;
   const parentArr = [];
   try {
-    const findParent = (treeData) => {
-      treeData.forEach((item) => {
+    const findParent = treeData => {
+      treeData.forEach(item => {
         parentArr.push(item[id]);
         if (item[id] === nodeId) {
           throw '';
@@ -105,7 +105,7 @@ const findTreeParentById = (tree, nodeId, fieldNames) => {
  * @returns {Array<any>} 返回祖先列表
  **/
 
-const findFlatParentById = (data, nodeId, fieldNames) => {
+export const findFlatParentById = (data, nodeId, fieldNames) => {
   const attr = {
     id: 'id',
     pid: 'pid',
@@ -116,7 +116,7 @@ const findFlatParentById = (data, nodeId, fieldNames) => {
   let curId = nodeId;
 
   while (curId) {
-    const curItem = data.find((item) => item[id] == curId);
+    const curItem = data.find(item => item[id] == curId);
     if (curItem) {
       curId = curItem[pid];
       parentArr.unshift(curItem[id]);
@@ -126,9 +126,9 @@ const findFlatParentById = (data, nodeId, fieldNames) => {
   }
 };
 
-export default {
-  treeToFlat,
-  flatToTree,
-  findTreeParentById,
-  findFlatParentById,
-};
+// export default {
+//   treeToFlat,
+//   flatToTree,
+//   findTreeParentById,
+//   findFlatParentById,
+// };
