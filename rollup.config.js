@@ -1,4 +1,4 @@
-import resolve from '@rollup/plugin-node-resolve';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import typescript from '@rollup/plugin-typescript';
@@ -11,7 +11,8 @@ export default [
       format: 'cjs',
       entryFileNames: '[name].cjs.js',
     },
-    plugins: [resolve(), commonjs(), typescript(), terser()],
+
+    plugins: [nodeResolve(), commonjs(), typescript(), terser()],
   },
   {
     input: './src/index.ts',
@@ -20,6 +21,7 @@ export default [
       format: 'esm',
       entryFileNames: '[name].esm.js',
     },
-    plugins: [resolve(), commonjs(), typescript(), terser()],
+    // 解析模块路径时，优先使用浏览器环境下的解析规则
+    plugins: [nodeResolve({ browser: true }), , commonjs(), typescript(), terser()],
   },
 ];
